@@ -1,0 +1,30 @@
+extends base.pug
+
+block template
+    .container.my-5.px-5
+        .card.mx-5
+            form(method='POST' action=`/posts/editpost/${post._id}/` enctype="multipart/form-data")
+                .card-header
+                    h4.fw-bold  Edit discover 
+                .card-body
+                    .row
+                        .col-md-6
+                            label.form-label(for='exampleInput1')  Title 
+                            input#exampleInput1.form-control(type='text' name="title" value=`${post.title}` required)
+                        .col-md-6
+                            label.form-label(for='exampleInput5')  Tag
+                            input#exampleInput5.form-control(type='text' name="tag" value=`${post.tag}` required)
+                    .mb-3 
+                        label.form-label(for='exampleInput19')  Description 
+                        input#exampleInput19.form-control(type='text' name="desc" value=`${post.desc}` required)                           
+                    .mb-3
+                        label.form-label(for='exampleInput6')  Image 
+                        input#exampleInput6.form-control(type='file' name="file" value=`${post.image}` required)
+                    .mb-3
+                        label.form-label(for='exampleFormControlTextarea1')  Content 
+                        textarea#mytextarea(name="content" required) !{post.content} 
+                
+                .card-footer
+                    button.btn.btn-success.px-5(type='submit') Submit
+
+block script 

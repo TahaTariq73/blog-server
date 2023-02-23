@@ -1,0 +1,11 @@
+extends base.pug
+
+block template
+    form.container.mt-5(method='POST' action="#")
+        .mb-3
+            label.form-label(for='exampleInput6')  Name
+            input#exampleInput6.form-control(type='text' name="name" required)
+        .mb-3
+            label.form-label(for='exampleInput6')  Password 
+            input#exampleInput6.form-control(type='password' name="password" required)
+        button.btn.btn-success.px-5(type='submit') Login

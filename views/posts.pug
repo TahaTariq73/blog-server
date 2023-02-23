@@ -1,0 +1,61 @@
+extends base.pug
+
+block template
+    #exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h1#exampleModalLabel.modal-title.fs-5.fw-bold Add post
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    form(method='POST' action="/posts/addpost/" enctype="multipart/form-data")
+                        .card-body
+                            .row
+                                .col-md-6
+                                    label.form-label(for='exampleInput1')  Title 
+                                    input#exampleInput1.form-control(type='text' name="title" required)
+                                .col-md-6
+                                    label.form-label(for='exampleInput5')  Tag 
+                                    input#exampleInput5.form-control(type='text' name="tag" required)
+                            .mb-3 
+                                label.form-label(for='exampleInput19')  Description 
+                                input#exampleInput19.form-control(type='text' name="desc" required)                           
+                            .mb-3
+                                label.form-label(for='exampleInput6')  Image 
+                                input#exampleInput6.form-control(type='file' name="file" required)
+                            .mb-3
+                                label.form-label(for='exampleFormControlTextarea1')  Content 
+                                textarea#mytextarea(name="content" required)  Hello, World! 
+                        .card-footer
+                            button.btn.btn-success.px-5(type='submit') Submit
+
+    .container.mt-5
+        div.d-flex.mb-4
+            input#myInput.form-control.me-2(type='text' placeholder='Search..')
+            button.btn.btn-dark.me-2(type='button') Filter
+            button.btn.btn-dark(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal') AddPost
+
+        table.table.table-striped.border
+            thead.bg-dark.text-light
+                tr
+                    th(scope='col')  Index 
+                    th(scope='col')  Title 
+                    th(scope='col')  Setting
+            tbody
+                each val, i in posts
+                    tr
+                        th(scope='row') #{i+1}
+                        td.w-100.title.fw-semibold #{val.title}
+                        td.d-flex
+                            img.border.me-2.rounded.secondary-text(src=`/static/uploads/${val.image}` alt="" width="30")
+                            a.btn.btn-danger.btn-sm.me-2(href=`/posts/editpost/${val._id}/`) Edit
+                            form(method='POST' action=`/posts/deletepost/${val._id}/`) 
+                                button.btn.btn-success.btn-sm(type='submit') Delete
+
+block script
+    script. 
+        const titles = document.querySelectorAll(".title");
+        titles.forEach(title => {
+            const truncateString = title.innerText.slice(0, 110) + "...";
+            title.innerText = truncateString;
+        }) 
