@@ -19,7 +19,7 @@ block template
                         input#exampleInput19.form-control(type='text' name="desc" value=`${post.desc}` required)                           
                     .mb-3
                         label.form-label(for='exampleInput6')  Image 
-                        input#exampleInput6.form-control(type='text' name="image" value=`${post.image}` required)
+                        input#exampleInput6.form-control(type='file' name="file" value=`${post.image}` required)
                     .mb-3
                         label.form-label(for='exampleFormControlTextarea1')  Content 
                         textarea#mytextarea(name="content" required) !{post.content} 
