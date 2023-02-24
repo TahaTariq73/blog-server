@@ -15,9 +15,9 @@ router.get("/", middleware, async (req, res) => {
     res.render("posts", params);
 })
 
-router.post("/addpost/", middleware, upload.single("file"), async (req, res) => {
-    const {title, tag, desc, content} = req.body;
-    const post = new Post({title, content, tag, desc, image: req.file.filename});        
+router.post("/addpost/", middleware, async (req, res) => {
+    const {title, tag, desc, content, image} = req.body;
+    const post = new Post({title, content, tag, desc, image});        
     const savedpost = await post.save();
 
     res.redirect("/posts/");
@@ -42,10 +42,10 @@ router.get("/editpost/:id/", middleware, async (req, res) => {
     }
 })
 
-router.post("/editpost/:id/", middleware, upload.single("file"), async (req, res) => {
+router.post("/editpost/:id/", middleware, async (req, res) => {
     try {
-        const {title, tag, content, desc} = req.body;
-        const editpost = {title, tag, desc, content, image: req.file.filename}
+        const {title, tag, content, desc, image} = req.body;
+        const editpost = {title, tag, desc, content, image}
         const post = await Post.findByIdAndUpdate(req.params.id, {$set: editpost});
         res.redirect("/posts/"); 
     } catch (err) {
